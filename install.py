@@ -8,6 +8,7 @@ pkgs = ['flask',               #flask web framework
         'uwsgi',               #uwsgi container
         'Flask-Babel',         #i18n
         'simplejson',          #better json
+        'qinu',                #qiniu sdk
        ]   
 for pkg in pkgs:
     local(SUDO_PIP_INSTALL % pkg)
