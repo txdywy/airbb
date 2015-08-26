@@ -1,7 +1,7 @@
 #!/bin/bash
 sudo apt-get update
 sudo apt-get upgrade
-sudo apt-get install python python-dev sqlite3 vnstat git htop 
+sudo apt-get install python python-dev sqlite3 vnstat git htop nginx 
 if [ -f /usr/local/bin/pip ] || [ -f /usr/bin/pip ];
 then
     echo "pip exists"
