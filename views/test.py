@@ -16,3 +16,8 @@ def haha():
             return _('u duplicated!')
     us = TestUser.query.all()
     return render_template('test/haha.html', us=us)
+
+
+@view.route('/style')
+def style():
+    return render_template('test/style.html')

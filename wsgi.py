@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask import Flask
 from models import db_session
-from views import test
 from config import DEBUG
 from flask.ext.babel import Babel
 
@@ -17,4 +16,5 @@ def shutdown_session(exception=None):
     db_session.remove()
 
 #attache view to app
+from views import test, root
 app.register_blueprint(test.view)
