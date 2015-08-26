@@ -5,6 +5,10 @@ from flask import (Blueprint, current_app, request, g, url_for, make_response,
 from models.model_test import TestUser, flush
 from wsgi import app
 
+@app.route('/')
+def index():
+    return render_template('test/style.html')
+
 @app.route('/style')
 def style():
     return render_template('test/style.html')
