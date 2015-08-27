@@ -43,6 +43,6 @@ def map():
     return render_template('test/map.html')
 
 
-@app.route('/map_search')
-def map_search():
-    return render_template('test/map_search.html')
+@app.route('/map_<name>')
+def map_name(name):
+	return render_template('test/map_%s.html' % name)
