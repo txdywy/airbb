@@ -46,3 +46,9 @@ def map():
 @app.route('/map_<name>')
 def map_name(name):
 	return render_template('test/map_%s.html' % name)
+
+
+@app.route('/m')
+def m():
+    lat, lng = '29.7604267', '-95.3698028'
+    return render_template('test/m.html', lat=lat, lng=lng)
