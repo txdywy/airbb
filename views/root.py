@@ -11,23 +11,38 @@ import simplejson as json
 def index():
     return render_template('test/style.html')
 
+
 @app.route('/style')
 def style():
     return render_template('test/style.html')
+
 
 @app.route('/creative')
 def creative():
     return render_template('test/creative.html')
 
+
 @app.route('/gray')
 def gray():
     return render_template('test/gray.html')
+
 
 @app.route('/qn')
 def qn():
     return render_template('test/qn.html')
 
+
 @app.route('/uptoken')
 def uptoken():
     d = {'uptoken': qiniu_agent.get_qn_token()}
     return json.dumps(d)
+
+
+@app.route('/map')
+def map():
+    return render_template('test/map.html')
+
+
+@app.route('/map_search')
+def map_search():
+    return render_template('test/map_search.html')
