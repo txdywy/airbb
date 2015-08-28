@@ -7,10 +7,6 @@ from wsgi import app
 from misc import qiniu_agent
 import simplejson as json
 
-@app.route('/')
-def index():
-    return render_template('test/style.html')
-
 
 @app.route('/style')
 def style():
@@ -52,3 +48,18 @@ def map_name(name):
 def m():
     lat, lng = '29.7604267', '-95.3698028'
     return render_template('test/m.html', lat=lat, lng=lng)
+
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+
+
+
+
+
+
+
+
+
