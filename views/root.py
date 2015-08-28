@@ -55,9 +55,11 @@ def index():
     return render_template('index.html')
 
 
+CITY_LOCATION = {'LA': {'lat': '34.052235', 'lng': '-118.243683'},
+                 'HU': {'lat': '29.7604267', 'lng': '-95.3698028'},}
 @app.route('/map')
 def map():
-    lat, lng = '29.7604267', '-95.3698028'
+    lat, lng = CITY_LOCATION['LA']['lat'], CITY_LOCATION['LA']['lng']
     return render_template('map.html', lat=lat, lng=lng)
 
 
