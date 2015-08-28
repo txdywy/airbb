@@ -34,8 +34,8 @@ def uptoken():
     return json.dumps(d)
 
 
-@app.route('/map')
-def map():
+@app.route('/map_test')
+def map_test():
     return render_template('test/map.html')
 
 
@@ -53,6 +53,12 @@ def m():
 @app.route('/')
 def index():
     return render_template('index.html')
+
+
+@app.route('/map')
+def map():
+    lat, lng = '29.7604267', '-95.3698028'
+    return render_template('map.html', lat=lat, lng=lng)
 
 
 
