@@ -91,7 +91,7 @@
 
       var houses = [
         {% for h in houses %}
-          ['{{ h[0] }}', {{ h[1] }}, {{ h[2] }}, {{ h[3] }}],
+          ['{{ h[0] }}', {{ h[1] }}, {{ h[2] }}, {{ h[3] }}, '{{ h[4] }}'],
         {% endfor %}
       ];
 
@@ -132,6 +132,24 @@
 
         for (var i = 0; i < houses.length; i++) {
           var house = houses[i];
+          var contentString = '<div id="content">'+
+                '<div id="siteNotice">'+
+                '</div>'+
+                '<img border="0" src="'+
+                house[4]+
+                '" width="120" height="100" alt="...">'+
+                '<h1 id="firstHeading" class="firstHeading">'+
+                house[0]+
+                '</h1>'+
+                '<div id="bodyContent">'+
+                '<p><b>'+
+                house[0]+
+                '</b>, 各种房产信息...</p>'+
+                '</div>'+
+                '</div>';
+          var infowindow = new google.maps.InfoWindow({
+            content: contentString
+          });
           var mkr = new google.maps.Marker({
             position: {lat: house[1], lng: house[2]},
             map: map,
@@ -141,6 +159,13 @@
             zIndex: house[3],
             animation: google.maps.Animation.DROP
           });
+          
+          google.maps.event.addListener(mkr,'click', (function(mkr,content,infowindow){ 
+              return function() {
+                  infowindow.setContent(content);
+                  infowindow.open(map,mkr);
+              };
+          })(mkr,contentString,infowindow)); 
         }
 
       };

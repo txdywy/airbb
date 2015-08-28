@@ -64,11 +64,11 @@ CITY_LOCATION = {'la': {'lat': '34.052235', 'lng': '-118.243683'},
                  'sy': {'lat': '-33.865143', 'lng': '151.209900'},
                  }
 LA_HOUSES = [
-        ['Wine Riot', 34.1839292, -118.3375242, 4],
-        ['New World Mac', 34.057486, -118.2374418, 5],
-        ['LA iPhone Repair', 34.1067475, -117.8571622, 3],
-        ['Shakespeare Bridge', 34.0833848, -118.3468681, 2],
-        ['Excalibur Movers', 34.1054515, -118.2785795, 1]
+        ['Wine Riot', 34.1839292, -118.3375242, 4, 'http://image1.rent.com/imgr/b0c1da9100b23397411084effcf7669b/200-200'],
+        ['New World Mac', 34.057486, -118.2374418, 5, 'http://image1.rent.com/imgr/6a74d975eb14c273f8afde040c8a8d32/200-200'],
+        ['LA iPhone Repair', 34.1067475, -117.8571622, 3, 'http://image.rent.com/imgr/823978834bdbacd0aecc02c65b2663f4/200-200'],
+        ['Shakespeare Bridge', 34.0833848, -118.3468681, 2, 'http://image.rent.com/imgr/a84c1155e3d1b4a9224559202b898b86/200-200'],
+        ['Excalibur Movers', 34.1054515, -118.2785795, 1, 'http://image.rent.com/imgr/5781c6c6c99571f8f3ad6d0ceee38b3b/200-200']
       ]
 
 @app.route('/map')
@@ -80,6 +80,7 @@ def map():
         houses = LA_HOUSES
     else:
         houses = "[]"
+    print '========', houses
     return render_template('map.html', lat=lat, lng=lng, houses=houses)
 
 
