@@ -55,11 +55,19 @@ def index():
     return render_template('index.html')
 
 
-CITY_LOCATION = {'LA': {'lat': '34.052235', 'lng': '-118.243683'},
-                 'HU': {'lat': '29.7604267', 'lng': '-95.3698028'},}
+CITY_LOCATION = {'la': {'lat': '34.052235', 'lng': '-118.243683'},
+                 'hu': {'lat': '29.7604267', 'lng': '-95.3698028'},
+                 'pa': {'lat': '48.858093', 'lng': '2.294694'},
+                 'lo': {'lat': '51.508530', 'lng': '-0.076132'},
+                 'va': {'lat': '49.246292', 'lng': '-123.116226'},
+                 'ba': {'lat': '41.390205', 'lng': '2.154007'},
+                 'sy': {'lat': '-33.865143', 'lng': '151.209900'},
+                 }
 @app.route('/map')
 def map():
-    lat, lng = CITY_LOCATION['LA']['lat'], CITY_LOCATION['LA']['lng']
+    k = request.args.get('k')
+    city = CITY_LOCATION.get(k)
+    lat, lng = (city['lat'], city['lng']) if city else (CITY_LOCATION['la']['lat'], CITY_LOCATION['la']['lng'])
     return render_template('map.html', lat=lat, lng=lng)
 
 
