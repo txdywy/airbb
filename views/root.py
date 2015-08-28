@@ -63,12 +63,24 @@ CITY_LOCATION = {'la': {'lat': '34.052235', 'lng': '-118.243683'},
                  'ba': {'lat': '41.390205', 'lng': '2.154007'},
                  'sy': {'lat': '-33.865143', 'lng': '151.209900'},
                  }
+LA_HOUSES = [
+        ['Wine Riot', 34.1839292, -118.3375242, 4],
+        ['New World Mac', 34.057486, -118.2374418, 5],
+        ['LA iPhone Repair', 34.1067475, -117.8571622, 3],
+        ['Shakespeare Bridge', 34.0833848, -118.3468681, 2],
+        ['Excalibur Movers', 34.1054515, -118.2785795, 1]
+      ]
+
 @app.route('/map')
 def map():
     k = request.args.get('k')
     city = CITY_LOCATION.get(k)
     lat, lng = (city['lat'], city['lng']) if city else (CITY_LOCATION['la']['lat'], CITY_LOCATION['la']['lng'])
-    return render_template('map.html', lat=lat, lng=lng)
+    if not k or k == 'la':
+        houses = LA_HOUSES
+    else:
+        houses = "[]"
+    return render_template('map.html', lat=lat, lng=lng, houses=houses)
 
 
 
