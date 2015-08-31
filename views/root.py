@@ -79,7 +79,7 @@ def map():
     if not k or k == 'la':
         houses = LA_HOUSES
     else:
-        houses = "[]"
+        houses = []
     print '========', houses
     return render_template('map.html', lat=lat, lng=lng, houses=houses)
 
