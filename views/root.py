@@ -1,11 +1,91 @@
 # -*- coding: utf-8 -*-
 from views import *
 from flask import (Blueprint, current_app, request, g, url_for, make_response,
-                   render_template, redirect, jsonify)
-from models.model_test import TestUser, flush
+                   render_template, redirect, jsonify, flash)
+from models.model_airbb import House, User, flush
+from werkzeug import check_password_hash, generate_password_hash
 from wsgi import app
 from misc import qiniu_agent
 import simplejson as json
+import functools
+
+
+@app.before_request
+def before_request():
+    g.user = None
+    if 'user_id' in session:
+        g.user = User.query.get(session['user_id'])
+
+
+def login_required(f):
+    @functools.wraps(f)
+    def func(*args, **kwargs):
+        if 'user_id' in session:
+            return f(*args, **kwargs)
+        else:
+            return redirect(url_for('login'))
+    return func
+
+
+def exr(f):
+    @functools.wraps(f)
+    def func(*args, **kwargs):
+        try:
+            return f(*args, **kwargs)
+        except Exception, e:
+            return str(e)
+    return func
+
+
+@app.route('/register', methods=['GET', 'POST'])
+@exr
+def register():
+    """Registers the user."""
+    if g.user:
+        return redirect(url_for('index'))
+    error = None
+    if request.method == 'POST':
+        email = request.form['email'].strip()
+        if not email or '@' not in email:
+            error = 'email无效'
+        elif not request.form['password']:
+            error = '需要输入密码'
+        elif request.form['password'] != request.form['password2']:
+            error = '密码错误'
+        elif User.query.filter_by(email=email).first():
+            error = 'email已被使用'
+        else:
+            u = User(email=email, pw_hash=generate_password_hash(request.form['password']))
+            flush(u)
+            session['user_id'] = u.id
+            flash('注册成功')
+            return redirect(url_for('index'))
+    return render_template('register.html')
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    """Logs the user in."""
+    if g.user:
+        return redirect(url_for('index'))
+    error = None
+    if request.method == 'POST':
+        try:
+            email = request.form['email']
+        except:
+            abort(404)
+        user = User.query.filter_by(email=email).first()
+        if user is None:
+            error = '用户名/密码无效'
+        elif not check_password_hash(user.pw_hash, request.form['password']):
+            error = '用户名/密码无效'
+        else:
+            flash('登录成功')
+            session['user_id'] = user.id
+            return redirect(url_for('index'))
+    if error:
+        flash(error)
+    return render_template('login.html', error=error)
 
 
 @app.route('/style')
