@@ -1,0 +1,1 @@
+uwsgi --http :1222 --module wsgi --callable app --check-static ./static
