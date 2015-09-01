@@ -24,8 +24,8 @@ def restart():
         run('supervisorctl restart airbb')
 
 def update_db():
-    with cd('~/flask/examples/minitwit/'):
-        run('openssl enc -des -d -a -in airbb_db_enc -out airbb.db')
+    with cd('~/airbb/'):
+        run('openssl enc -des -d -a -in airbb.enc -out airbb.db')
 
 def init_db():
     with cd('~/airbb/'):
