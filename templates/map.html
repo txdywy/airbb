@@ -22,6 +22,9 @@
       </div>
       <img border="0" src="{{ h.img }}" width="220" height="200" alt="...">
       <p>详细信息...</p>
+      <p>地址: {{ h.address }}</p>
+      <p>邮编: {{ h.zipcode }}</p>
+      <p>网址: <a href="{{ h.url }}">猛戳这里</a></p>
       
       <hr>
       {% endfor %}
@@ -61,7 +64,7 @@
 
       var houses = [
         {% for h in houses %}
-          ['{{ h.title }}', {{ h.lat }}, {{ h.lng }}, {{ h.id }}, '{{ h.img }}'],
+          ['{{ h.title }}', {{ h.lat }}, {{ h.lng }}, {{ h.id }}, '{{ h.img }}', '{{ h.address }}', '{{ h.zipcode }}', '{{ h.url }}'],
         {% endfor %}
       ];
 
@@ -115,6 +118,9 @@
                 '<p><b>'+
                 house[0]+
                 '</b>, 各种房产信息...</p>'+
+                '<p>地址: '+house[5]+'</p>'+
+                '<p>邮编: '+house[6]+'</p>'+
+                '<p>网址: <a href="'+house[7]+'">猛戳这里</a></p>'+
                 '</div>'+
                 '</div>';
           var infowindow = new google.maps.InfoWindow({
