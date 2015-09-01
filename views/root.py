@@ -2,7 +2,7 @@
 from views import *
 from flask import (Blueprint, current_app, request, g, url_for, make_response,
                    render_template, redirect, jsonify, flash, session)
-from models.model_airbb import House, User, flush
+from models.model_airbb import House, User, City, flush
 from werkzeug import check_password_hash, generate_password_hash
 from wsgi import app
 from misc import qiniu_agent
@@ -166,14 +166,12 @@ LA_HOUSES = [
 @app.route('/map')
 def map():
     k = request.args.get('k')
-    city = CITY_LOCATION.get(k)
-    lat, lng = (city['lat'], city['lng']) if city else (CITY_LOCATION['la']['lat'], CITY_LOCATION['la']['lng'])
-    if not k or k == 'la':
-        houses = LA_HOUSES
-    else:
-        houses = []
-    print '========', houses
-    return render_template('map.html', lat=lat, lng=lng, houses=houses)
+    city = City.query.filter_by(abbr=k).first()
+    if not city:
+        city = City.query.filter_by(abbr='la').first()
+    lat, lng = (city.lat, city.lng) if city else (CITY_LOCATION['la']['lat'], CITY_LOCATION['la']['lng'])
+    houses = House.query.filter_by(city_id=city.id).all()
+    return render_template('map.html', lat=city.lat, lng=city.lng, houses=houses)
 
 
 
