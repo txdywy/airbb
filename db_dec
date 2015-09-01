@@ -1,0 +1,1 @@
+openssl enc -des -d -a -in airbb.enc -out airbb.db
