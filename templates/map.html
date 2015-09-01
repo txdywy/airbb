@@ -61,7 +61,7 @@
 
       var houses = [
         {% for h in houses %}
-          ['{{ h.title }}', {{ h.lat }}, {{ h.lng }}, {{ h.id }}, '{{ g.img }}'],
+          ['{{ h.title }}', {{ h.lat }}, {{ h.lng }}, {{ h.id }}, '{{ h.img }}'],
         {% endfor %}
       ];
 
