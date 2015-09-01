@@ -27,6 +27,18 @@ def login_required(f):
     return func
 
 
+def power_required(power=User.POWER_ADMIN):
+    def deco(f):
+        @functools.wraps(f)
+        def func(*args, **kwargs):
+            if g.user.power & power:
+                return f(*args, **kwargs) 
+            else:
+                return redirect(url_for('login'))
+        return func
+    return deco
+
+
 def exr(f):
     @functools.wraps(f)
     def func(*args, **kwargs):
