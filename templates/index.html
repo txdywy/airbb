@@ -70,6 +70,13 @@
                     <li>
                         <a class="page-scroll" href="#contact">联系</a>
                     </li>
+                    <li>
+                        {% if g.user %}
+                        <a href="{{ url_for('logout') }}">注销[{{ g.user.name }}]</a>
+                        {% else %}
+                        <a href="{{ url_for('login') }}">登录/注册</a>
+                        {% endif %}
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

@@ -100,6 +100,14 @@ def login():
     return render_template('login.html', error=error)
 
 
+@app.route('/logout')
+def logout():
+    """Logs the user out."""
+    flash('注销成功')
+    session.pop('user_id', None)
+    return redirect(url_for('index'))
+
+
 @app.route('/style')
 def style():
     return render_template('test/style.html')
