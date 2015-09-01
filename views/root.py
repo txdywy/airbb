@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from views import *
 from flask import (Blueprint, current_app, request, g, url_for, make_response,
-                   render_template, redirect, jsonify, flash)
+                   render_template, redirect, jsonify, flash, session)
 from models.model_airbb import House, User, flush
 from werkzeug import check_password_hash, generate_password_hash
 from wsgi import app
