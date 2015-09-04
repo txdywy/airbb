@@ -150,6 +150,12 @@ def m():
     return render_template('test/m.html', lat=lat, lng=lng)
 
 
+
+@app.route('/car')
+def car():
+    return render_template('test/carousel.html')
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
