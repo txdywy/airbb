@@ -27,6 +27,10 @@ def update_db():
     with cd('~/airbb/'):
         run('openssl enc -des -d -a -in airbb.enc -out airbb.db')
 
+def db():
+    with cd('~/airbb/'):
+        run('./db_dec')
+
 def init_db():
     with cd('~/airbb/'):
         run("python -c 'from models.model_test import *;init_db()'")

@@ -12,9 +12,25 @@ class City(Base):
     info = Column(String(512))
     img = Column(String(512))
     url = Column(String(512))
-    
+
     def __repr__(self):
         return '<City %r>' % (self.id)
+
+
+class Area(Base):
+    __tablename__ = 'area'
+    id = Column(Integer, primary_key=True)
+    lat = Column(String(50))
+    lng = Column(String(50))
+    city_id = Column(Integer, index=True)
+    name = Column(String(128))
+    info = Column(String(512))
+    img = Column(String(512))
+    url = Column(String(512))
+
+
+    def __repr__(self):
+        return '<Area %r>' % (self.id)
 
 
 class House(Base):
@@ -30,14 +46,14 @@ class House(Base):
     img = Column(String(512))
     url = Column(String(512))
 
-    
+
     def __repr__(self):
         return '<House %r>' % (self.id)
 
 
 class User(Base):
     __tablename__ = 'user'
-    
+
     POWER_ADMIN = 2**9
 
     id = Column(Integer, primary_key=True)

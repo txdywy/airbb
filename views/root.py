@@ -2,7 +2,7 @@
 from views import *
 from flask import (Blueprint, current_app, request, g, url_for, make_response,
                    render_template, redirect, jsonify, flash, session)
-from models.model_airbb import House, User, City, flush
+from models.model_airbb import House, User, City, Area, flush
 from werkzeug import check_password_hash, generate_password_hash
 from wsgi import app
 from misc import qiniu_agent
@@ -149,11 +149,17 @@ def m():
     lat, lng = '29.7604267', '-95.3698028'
     return render_template('test/m.html', lat=lat, lng=lng)
 
-
-
 @app.route('/car')
 def car():
-    return render_template('area.html')
+    return render_template('test/carousel.html')
+
+
+@app.route('/area')
+def area():
+    areas = Area.query.filter_by(city_id=4).all()
+    city = City.query.get(4)
+    print '=======',len(areas)
+    return render_template('area.html', city=city, areas=areas, num=len(areas))
 
 
 @app.route('/')
