@@ -32,7 +32,7 @@ def power_required(power=User.POWER_ADMIN):
         @functools.wraps(f)
         def func(*args, **kwargs):
             if g.user.power & power:
-                return f(*args, **kwargs) 
+                return f(*args, **kwargs)
             else:
                 return redirect(url_for('login'))
         return func
@@ -153,7 +153,7 @@ def m():
 
 @app.route('/car')
 def car():
-    return render_template('test/carousel.html')
+    return render_template('area.html')
 
 
 @app.route('/')
@@ -186,13 +186,3 @@ def map():
     lat, lng = (city.lat, city.lng) if city else (CITY_LOCATION['la']['lat'], CITY_LOCATION['la']['lng'])
     houses = House.query.filter_by(city_id=city.id).all()
     return render_template('map.html', lat=city.lat, lng=city.lng, houses=houses)
-
-
-
-
-
-
-
-
-
-
