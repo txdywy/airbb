@@ -156,8 +156,11 @@ def car():
 
 @app.route('/area')
 def area():
-    areas = Area.query.filter_by(city_id=4).all()
-    city = City.query.get(4)
+    k = request.args.get('k')
+    city = City.query.filter_by(abbr=k).first()
+    cid = city.id
+    areas = Area.query.filter_by(city_id=cid).all()
+    city = City.query.get(cid)
     print '=======',len(areas)
     return render_template('area.html', city=city, areas=areas, num=len(areas))
 
