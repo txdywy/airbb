@@ -493,3 +493,9 @@ header.carousel .fill {
     background-position: center;
     background-size: cover;
 }
+ 
+header.carousel .carousel-caption {
+      background-color: transparent;
+      top:40%;
+      text-align:center;
+    }
