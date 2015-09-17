@@ -178,7 +178,9 @@ header {
     min-height: auto;
     text-align: center;
     color: #fff;
+    /*
     background-image: url(../img/header.jpg);
+    */
     background-position: center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -479,6 +481,7 @@ body {
 
 header.carousel {
     height: 50%;
+    top:-34px;
 }
 
 header.carousel .item,
@@ -495,7 +498,25 @@ header.carousel .fill {
 }
  
 header.carousel .carousel-caption {
-      background-color: transparent;
-      top:40%;
-      text-align:center;
+    background-color: transparent;
+    top:30%;
+    text-align:center;
+}
+
+
+#search {
+    position:relative;
+    z-index:9999999;
+    top: 70%; /* change to whatever you want */
+    left: auto; /* change to whatever you want */
+    right:auto; /* change to whatever you want */
+    bottom:auto; /* change to whatever you want */
+    width: 50%;
+    margin: 0 auto;
+}
+
+@media (min-width: 767px) {
+    header.carousel-caption h2 {
+        font-size: 30px;
     }
+}
