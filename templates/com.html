@@ -21,9 +21,10 @@
         <div class="panel-heading"><a href="">{{ h.title }}</a></div>
       </div>
       <img border="0" src="{{ h.img }}" class="img-responsive img-centered" alt="...">
-      <p>详细信息...</p>
       <p>地址: {{ h.address }}</p>
-      <p>邮编: {{ h.zipcode }}</p>
+      <p>总价: {{ h.total_price }}</p>
+      <p>均价: {{ h.average_price }}</p>
+      <p>类型: {{ h.house_type }}</p>
       <p>网址: <a href="{{ h.url }}">猛戳这里</a></p>
       
       <hr>
@@ -64,7 +65,7 @@
 
       var coms = [
         {% for h in coms %}
-          ['{{ h.title }}', {{ h.lat }}, {{ h.lng }}, {{ h.id }}, '{{ h.img }}', '{{ h.address }}', '{{ h.zipcode }}', '{{ h.url }}'],
+          ['{{ h.title }}', {{ h.lat }}, {{ h.lng }}, {{ h.id }}, '{{ h.img }}', '{{ h.address }}', '{{ h.info }}', '{{ h.url }}', '{{ h.total_price }}', '{{ h.average_price }}', '{{ h.house_type }}', ],
         {% endfor %}
       ];
 
@@ -111,15 +112,18 @@
                 '<img border="0" src="'+
                 com[4]+
                 '" width="120" height="100" alt="...">'+
-                '<h1 id="firstHeading" class="firstHeading">'+
+                '<h3 id="firstHeading" class="firstHeading">'+
                 com[0]+
-                '</h1>'+
+                '</h3>'+
                 '<div id="bodyContent">'+
                 '<p><b>'+
                 com[0]+
                 '</b>, 各种房产信息...</p>'+
+                '<p>类型: '+com[10]+'</p>'+
+                '<p>总价: '+com[8]+'</p>'+
+                '<p>均价: '+com[9]+'</p>'+
                 '<p>地址: '+com[5]+'</p>'+
-                '<p>邮编: '+com[6]+'</p>'+
+                '<p>信息: '+com[6]+'</p>'+
                 '<p>网址: <a href="'+com[7]+'">猛戳这里</a></p>'+
                 '</div>'+
                 '</div>';
