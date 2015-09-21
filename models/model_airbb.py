@@ -66,6 +66,7 @@ class Community(Base):
     address = Column(String(512))
     img = Column(String(512))
     url = Column(String(512))
+    vir_url = Column(String(512))
 
 
     def __repr__(self):
