@@ -90,7 +90,7 @@
         <div class="input-group col-xs-10 col-md-5 " id="search">
             <input type="text" class="  search-query form-control" placeholder="Search" />
             <span class="input-group-btn">
-                <button class="btn btn-danger" type="button">
+                <button class="btn btn-danger" type="button" id="search-btn">
                     地图搜索
                     <span class=" glyphicon glyphicon-search"></span>
                 </button>
@@ -464,7 +464,13 @@
         interval: 3000 //changes the speed
     })
     </script>
-
+<script>
+  window.jQuery(document).ready(function($) {
+    $("#search-btn").click(function() {
+        window.location.href='com?k=hu';
+    });    
+  }); 
+</script>
 </body>
 
 </html>
