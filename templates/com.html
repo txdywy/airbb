@@ -1,0 +1,151 @@
+{% extends "layout.html" %}
+{% block headjs %}
+		<link href="m/css/bootstrap.min.css" rel="stylesheet">
+		<!--[if lt IE 9]>
+			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+    <link href="m/css/styles.css" rel="stylesheet">
+{% endblock headjs %}
+{% block title %}地图视角{% endblock %}
+{% block body %}
+<div id="map-canvas"></div>
+<div class="container-fluid" id="main">
+  <div class="row">
+  	<div class="col-xs-4" id="left">
+    
+      <h2>房源信息</h2>
+      
+      <!-- item list -->
+      {% for h in coms %}
+      <div class="panel panel-default">
+        <div class="panel-heading"><a href="">{{ h.title }}</a></div>
+      </div>
+      <img border="0" src="{{ h.img }}" class="img-responsive img-centered" alt="...">
+      <p>详细信息...</p>
+      <p>地址: {{ h.address }}</p>
+      <p>邮编: {{ h.zipcode }}</p>
+      <p>网址: <a href="{{ h.url }}">猛戳这里</a></p>
+      
+      <hr>
+      {% endfor %}
+      <!-- /item list -->
+      
+      <p>
+      <a href="/#about">关于我们</a> | <a href="/">首页</a>
+      </p>
+      
+      <hr> 
+        
+      <p>
+      <a href="/#portfolio" target="_ext" class="center-block btn btn-primary">更多房源信息</a>
+      </p>
+        
+      <hr>      
+
+    </div>
+    <div class="col-xs-4"><!--map-canvas will be postioned here--></div>
+    
+  </div>
+</div>
+{% endblock %}
+<!-- end template -->
+
+{% block tailjs %}
+	<!-- script references -->
+		<script src="//cdn.bootcss.com/jquery/2.0.2/jquery.min.js"></script>
+		<script src="m/js/bootstrap.min.js"></script>
+		<script src="http://ditu.google.cn/maps/api/js?sensor=false&extension=.js&output=embed&language=zh-CN"></script>
+    {#
+		<script src="m/js/scripts.js"></script>
+    #}	
+    <script>
+      $(document).ready(function(){/* google maps -----------------------------------------------------*/
+      google.maps.event.addDomListener(window, 'load', initialize);
+
+      var coms = [
+        {% for h in coms %}
+          ['{{ h.title }}', {{ h.lat }}, {{ h.lng }}, {{ h.id }}, '{{ h.img }}', '{{ h.address }}', '{{ h.zipcode }}', '{{ h.url }}'],
+        {% endfor %}
+      ];
+
+      function initialize() {
+
+        /* position Amsterdam */
+        var latlng = new google.maps.LatLng({{ lat }}, {{ lng }});
+
+        var mapOptions = {
+          center: latlng,
+          scrollWheel: false,
+          zoom: 8,
+        };
+        
+        var marker = new google.maps.Marker({
+          position: latlng,
+          url: '/',
+          animation: google.maps.Animation.DROP
+        });
+
+        var image = {
+          url: 'ico-size-big.png',
+          // This marker is 20 pixels wide by 32 pixels high.
+          size: new google.maps.Size(25, 25),
+          // The origin for this image is (0, 0).
+          origin: new google.maps.Point(0, 0),
+          // The anchor for this image is the base of the flagpole at (0, 32).
+          anchor: new google.maps.Point(0, 25)
+        };
+
+        var shape = {
+          coords: [1, 1, 1, 20, 18, 20, 18, 1],
+          type: 'poly'
+        };
+        
+        var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+        marker.setMap(map);
+
+        for (var i = 0; i < coms.length; i++) {
+          var com = coms[i];
+          var contentString = '<div id="content">'+
+                '<div id="siteNotice">'+
+                '</div>'+
+                '<img border="0" src="'+
+                com[4]+
+                '" width="120" height="100" alt="...">'+
+                '<h1 id="firstHeading" class="firstHeading">'+
+                com[0]+
+                '</h1>'+
+                '<div id="bodyContent">'+
+                '<p><b>'+
+                com[0]+
+                '</b>, 各种房产信息...</p>'+
+                '<p>地址: '+com[5]+'</p>'+
+                '<p>邮编: '+com[6]+'</p>'+
+                '<p>网址: <a href="'+com[7]+'">猛戳这里</a></p>'+
+                '</div>'+
+                '</div>';
+          var infowindow = new google.maps.InfoWindow({
+            content: contentString
+          });
+          var mkr = new google.maps.Marker({
+            position: {lat: com[1], lng: com[2]},
+            map: map,
+            icon: image,
+            shape: shape,
+            title: com[0],
+            zIndex: com[3],
+            animation: google.maps.Animation.DROP
+          });
+          
+          google.maps.event.addListener(mkr,'click', (function(mkr,content,infowindow){ 
+              return function() {
+                  infowindow.setContent(content);
+                  infowindow.open(map,mkr);
+              };
+          })(mkr,contentString,infowindow)); 
+        }
+
+      };
+      /* end google maps -----------------------------------------------------*/
+      });
+    </script>
+{% endblock tailjs %}
