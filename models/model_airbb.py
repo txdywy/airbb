@@ -51,6 +51,27 @@ class House(Base):
         return '<House %r>' % (self.id)
 
 
+class Community(Base):
+    __tablename__ = 'community'
+    id = Column(Integer, primary_key=True)
+    lat = Column(String(50))
+    lng = Column(String(50))
+    city_id = Column(Integer, index=True)
+    title = Column(String(128))
+    info = Column(String(512))
+    total_price = Column(String(50))
+    average_price = Column(String(50))
+    house_type = Column(String(50))
+    zipcode = Column(String(16))
+    address = Column(String(512))
+    img = Column(String(512))
+    url = Column(String(512))
+
+
+    def __repr__(self):
+        return '<community %r>' % (self.id)
+
+
 class User(Base):
     __tablename__ = 'user'
 
