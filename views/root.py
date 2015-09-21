@@ -158,6 +158,8 @@ def car():
 def area():
     k = request.args.get('k')
     city = City.query.filter_by(abbr=k).first()
+    if not city:
+        city = City.query.get(4)
     cid = city.id
     areas = Area.query.filter_by(city_id=cid).all()
     city = City.query.get(cid)
