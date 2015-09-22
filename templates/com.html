@@ -72,7 +72,7 @@
 
       var schs = [
         {% for s in schs %}
-          [{{ s.lat }}, {{ s.lng }}, '{{ s.data['properties']['name'] }}', ],
+          [{{ s.lat }}, {{ s.lng }}, '{{ s.data['properties']['name'] }}', '{{ s.data['properties']['grade_level_low'] }}-{{ s.data['properties']['grade_level_high'] }}', '{{ s.data['properties']['student_ct'] }}', '{{ s.data['properties']['teacher_ct'] }}', '{{ s.data['properties']['rating_label'] }}', '{{ s.data['properties']['rating'] }}', ],
         {% endfor %}
       ];
 
@@ -247,6 +247,13 @@
                     '<h3 id="firstHeading" class="firstHeading">'+
                     sch[2]+
                     '</h3>'+
+                    '<div id="bodyContent">'+
+                    '<p>年级: '+sch[3]+'</p>'+
+                    '<p>学生: '+sch[4]+'</p>'+
+                    '<p>教师: '+sch[5]+'</p>'+
+                    '<p>评价: '+sch[6]+'</p>'+
+                    '<p>分数: '+sch[7]+'</p>'+
+                    '</div>'+
                     '</div>';
               var infowindow = new google.maps.InfoWindow({
                 content: contentString
