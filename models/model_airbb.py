@@ -73,6 +73,19 @@ class Community(Base):
         return '<community %r>' % (self.id)
 
 
+class School(Base):
+    __tablename__ = 'school'
+    id = Column(Integer, primary_key=True)
+    lat = Column(String(50))
+    lng = Column(String(50))
+    city_id = Column(Integer, index=True)
+    data = Column(MutableDict.as_mutable(PickleType))
+    
+
+    def __repr__(self):
+        return '<school %r>' % (self.id)
+
+
 class User(Base):
     __tablename__ = 'user'
 

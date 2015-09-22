@@ -2,7 +2,7 @@
 from views import *
 from flask import (Blueprint, current_app, request, g, url_for, make_response,
                    render_template, redirect, jsonify, flash, session)
-from models.model_airbb import House, User, City, Area, Community, flush
+from models.model_airbb import *
 from werkzeug import check_password_hash, generate_password_hash
 from wsgi import app
 from misc import qiniu_agent
@@ -207,4 +207,5 @@ def com():
         city = City.query.filter_by(abbr='hu').first()
     lat, lng = (city.lat, city.lng) if city else (CITY_LOCATION['la']['lat'], CITY_LOCATION['la']['lng'])
     coms = Community.query.filter_by(city_id=city.id).all()
-    return render_template('com.html', lat=city.lat, lng=city.lng, coms=coms)
+    schs = School.query.filter_by(city_id=city.id).all()
+    return render_template('com.html', lat=city.lat, lng=city.lng, coms=coms, schs=schs)
