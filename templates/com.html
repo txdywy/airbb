@@ -210,6 +210,7 @@
 
         
         //School btn
+        var school_mkrs = [];
         function SchoolControl(controlDiv, map) {
 
           // Set CSS for the control border.
@@ -238,44 +239,51 @@
           // Setup the click event listeners: simply set the map to Chicago.
           controlUI.addEventListener('click', function() {
             //map.setCenter(center);
-
-            for (var i = 0; i < schs.length; i++) {
-              var sch = schs[i];
-              var contentString = '<div id="content">'+
-                    '<div id="siteNotice">'+
-                    '</div>'+
-                    '<h3 id="firstHeading" class="firstHeading">'+
-                    sch[2]+
-                    '</h3>'+
-                    '<div id="bodyContent">'+
-                    '<p>年级: '+sch[3]+'</p>'+
-                    '<p>学生: '+sch[4]+'</p>'+
-                    '<p>教师: '+sch[5]+'</p>'+
-                    '<p>评价: '+sch[6]+'</p>'+
-                    '<p>分数: '+sch[7]+'</p>'+
-                    '</div>'+
-                    '</div>';
-              var infowindow = new google.maps.InfoWindow({
-                content: contentString
-              });
-              var mkr = new google.maps.Marker({
-                position: {lat: sch[0], lng: sch[1]},
-                map: map,
-                icon: school_image,
-                shape: shape,
-                title: sch[2],
-                //zIndex: com[3],
-                animation: google.maps.Animation.DROP
-              });
-              
-              google.maps.event.addListener(mkr,'click', (function(mkr,content,infowindow){ 
-                  return function() {
-                      infowindow.setContent(content);
-                      infowindow.open(map,mkr);
-                  };
-              })(mkr,contentString,infowindow)); 
+            if (school_mkrs.length > 0){
+              for (var i = 0; i < school_mkrs.length; i++){
+                school_mkrs[i].setMap(null);
+              }
+              school_mkrs = [];
             }
-
+            else{
+              for (var i = 0; i < schs.length; i++) {
+                var sch = schs[i];
+                var contentString = '<div id="content">'+
+                      '<div id="siteNotice">'+
+                      '</div>'+
+                      '<h3 id="firstHeading" class="firstHeading">'+
+                      sch[2]+
+                      '</h3>'+
+                      '<div id="bodyContent">'+
+                      '<p>年级: '+sch[3]+'</p>'+
+                      '<p>学生: '+sch[4]+'</p>'+
+                      '<p>教师: '+sch[5]+'</p>'+
+                      '<p>评价: '+sch[6]+'</p>'+
+                      '<p>分数: '+sch[7]+'</p>'+
+                      '</div>'+
+                      '</div>';
+                var infowindow = new google.maps.InfoWindow({
+                  content: contentString
+                });
+                var mkr = new google.maps.Marker({
+                  position: {lat: sch[0], lng: sch[1]},
+                  map: map,
+                  icon: school_image,
+                  shape: shape,
+                  title: sch[2],
+                  //zIndex: com[3],
+                  animation: google.maps.Animation.DROP
+                });
+                school_mkrs.push(mkr);
+                
+                google.maps.event.addListener(mkr,'click', (function(mkr,content,infowindow){ 
+                    return function() {
+                        infowindow.setContent(content);
+                        infowindow.open(map,mkr);
+                    };
+                })(mkr,contentString,infowindow)); 
+              }
+            }
 
 
           });
