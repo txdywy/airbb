@@ -169,7 +169,9 @@ def area():
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    city = request.args.get('c')
+    city = city if city else u'\u57ce\u5e02'
+    return render_template('index.html', city=city)
 
 
 CITY_LOCATION = {'la': {'lat': '34.052235', 'lng': '-118.243683'},

@@ -30,8 +30,12 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-        <script src="/js/bootstrap-select.min.js"></script>
+    
+    <script src="/js/bootstrap-select.min.js"></script>
     <link rel='stylesheet' href='/css/bootstrap-select.min.css' type='text/css' media='all' />
+
+    <script src="/js/dropdowns-enhancement.js"></script>
+    <link rel='stylesheet' href='/css/dropdowns-enhancement.min.css' type='text/css' media='all' />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -54,6 +58,9 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand page-scroll" href="/#page-top">八仙过海</a>
+
+
+                {#
                 <select class="navbar-brand selectpicker" data-width="120px" id="role">
                     <optgroup label="美国">
                         <option>休斯顿</option>
@@ -76,6 +83,45 @@
                       <option>堪培拉</option>
                     </optgroup>
                 </select>
+                #}
+
+                
+                <div class="navbar-brand page-scroll">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ city }}<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">美国</a>
+                        <ul class="dropdown-menu">
+                            <li class="kopie"><a href="/?c=休斯顿">休斯顿</a></li>
+                            <li><a href="/?c=洛杉矶">洛杉矶</a></li>
+                            <li><a href="/?c=纽约">纽约</a></li>
+                        </ul>
+                      </li> 
+                      <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">加拿大</a>
+                        <ul class="dropdown-menu">
+                            <li class="kopie"><a href="/?c=温哥华">温哥华</a></li>
+                            <li><a href="/?c=多伦多">多伦多</a></li>
+                            <li><a href="/?c=蒙特利尔">蒙特利尔</a></li>
+                        </ul>
+                      </li>    
+                      <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">英国</a>
+                        <ul class="dropdown-menu">
+                            <li class="kopie"><a href="/?c=伦敦">伦敦</a></li>
+                            <li><a href="/?c=曼彻斯特">曼彻斯特</a></li>
+                            <li><a href="/?c=利物浦">利物浦</a></li>
+                        </ul>
+                      </li>   
+                      <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">澳大利亚</a>
+                        <ul class="dropdown-menu">
+                            <li class="kopie"><a href="#">悉尼</a></li>
+                            <li><a href="#">墨尔本</a></li>
+                            <li><a href="#">堪培拉</a></li>
+                        </ul>
+                      </li>                         
+                    </ul>
+                </div>
+                
+
+
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
