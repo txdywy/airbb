@@ -210,4 +210,5 @@ def com():
     lat, lng = (city.lat, city.lng) if city else (CITY_LOCATION['la']['lat'], CITY_LOCATION['la']['lng'])
     coms = Community.query.filter_by(city_id=city.id).all()
     schs = School.query.filter_by(city_id=city.id).all()
-    return render_template('com.html', lat=city.lat, lng=city.lng, coms=coms, schs=schs)
+    cris = Crime.query.filter_by(city_id=city.id).all()
+    return render_template('com.html', lat=city.lat, lng=city.lng, coms=coms, schs=schs, cris=cris)
