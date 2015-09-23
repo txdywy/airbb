@@ -78,7 +78,7 @@
 
       var cris = [
         {% for c in cris %}
-          [{{ c.lat }}, {{ c.lng }}, '{{ c.data['properties']['category'] }}', ],
+          [{{ c.lat }}, {{ c.lng }}, '{{ c.data['properties']['category'] }}', '{{ c.data['properties']['date'] }}'],
         {% endfor %}
       ];
 
@@ -357,6 +357,7 @@
                       '<h3 id="firstHeading" class="firstHeading">'+
                       cri[2]+
                       '</h3>'+
+                      '<p>日期: '+cri[3]+'</p>'+
                       '</div>';
                 var infowindow = new google.maps.InfoWindow({
                   content: contentString
