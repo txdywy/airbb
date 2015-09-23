@@ -86,6 +86,19 @@ class School(Base):
         return '<school %r>' % (self.id)
 
 
+class Crime(Base):
+    __tablename__ = 'crime'
+    id = Column(Integer, primary_key=True)
+    lat = Column(String(50))
+    lng = Column(String(50))
+    city_id = Column(Integer, index=True)
+    data = Column(MutableDict.as_mutable(PickleType))
+    
+
+    def __repr__(self):
+        return '<crime %r>' % (self.id)
+
+
 class User(Base):
     __tablename__ = 'user'
 
