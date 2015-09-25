@@ -479,7 +479,9 @@ body {
 
 header.carousel {
     height: 50%;
+    /*
     top:-34px;
+    */
 }
 
 header.carousel .item,
