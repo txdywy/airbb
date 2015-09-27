@@ -59,32 +59,6 @@
                 </button>
                 <a class="navbar-brand page-scroll" href="/#page-top">八仙过海</a>
 
-
-                {#
-                <select class="navbar-brand selectpicker" data-width="120px" id="role">
-                    <optgroup label="美国">
-                        <option>休斯顿</option>
-                        <option>纽约</option>
-                        <option>洛杉矶</option>
-                    </optgroup>
-                    <optgroup label="加拿大">
-                      <option>温哥华</option>
-                      <option>多伦多</option>
-                      <option>蒙特利尔</option>
-                    </optgroup>
-                    <optgroup label="英国">
-                      <option>伦敦</option>
-                      <option>曼彻斯特</option>
-                      <option>利物浦</option>
-                    </optgroup>
-                    <optgroup label="澳大利亚">
-                      <option>悉尼</option>
-                      <option>慕尔本</option>
-                      <option>堪培拉</option>
-                    </optgroup>
-                </select>
-                #}
-
                 
                 <div class="navbar-brand page-scroll">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ city }}<span class="caret"></span></a>
@@ -159,73 +133,89 @@
         <!-- /.container-fluid -->
     </nav>
 
-    <video width="100%" autoplay="autoplay" loop="loop">
-        {#
-        <source src="http://ac-9dv47dhd.clouddn.com/81da882f81eb3a71.webm" type="video/mp4">
-        #}
-        <source src="http://ac-9dv47dhd.clouddn.com/d10ac90ce4aaf45b.webm" type="video/mp4">
-    </video>
-
-    <!-- Header Carousel -->
-    <header id="myCarousel" class="carousel slide">
-        <div class="input-group col-xs-10 col-md-5 " id="search">
-            <input type="text" class="  search-query form-control" placeholder="Search" />
-            <span class="input-group-btn">
-                <button class="btn btn-danger" type="button" id="search-btn">
-                    地图搜索
-                    <span class=" glyphicon glyphicon-search"></span>
-                </button>
-            </span>
-        </div>
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-            <li data-target="#myCarousel" data-slide-to="3"></li>
-        </ol>
-
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
-            <div class="item active">
-                <div class="fill" style="background-image:url('http://ac-9dv47dhd.clouddn.com/b26dbdce139abc64.jpg');"></div>
-                <div class="carousel-caption">
-                    <h2 style="font-size: 70px;">八仙过海</h2>
-                    <h2>海外新房</h2>
+    <div id="head-page">
+        <video width="100%" autoplay="autoplay" loop="loop">
+            {#
+            <source src="http://ac-9dv47dhd.clouddn.com/81da882f81eb3a71.webm" type="video/mp4">
+            #}
+            <source src="http://ac-9dv47dhd.clouddn.com/d10ac90ce4aaf45b.webm" type="video/mp4">
+        </video>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="service-box">
+                    <i class="fa fa-4x fa-dollar wow bounceIn text-primary"></i>
+                    <h3>金融</h3>
+                    <p class="text-muted">贷款,众筹,分期付,只有想不到没有做不到</p>
                 </div>
             </div>
-            <div class="item">
-                <div class="fill" style="background-image:url('http://ac-9dv47dhd.clouddn.com/c89676619add1987.jpg');"></div>
-                <div class="carousel-caption">
-                    <h2 style="font-size: 70px;">八仙过海</h2>
-                    <h2>房产托管</h2>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="service-box">
+                    <i class="fa fa-4x fa-user-md wow bounceIn text-primary" data-wow-delay=".1s"></i>
+                    <h3>托管</h3>
+                    <p class="text-muted">贴心管家,替您打理海外房产</p>
                 </div>
             </div>
-            <div class="item">
-                <div class="fill" style="background-image:url('http://ac-9dv47dhd.clouddn.com/2d0b77586434672d.jpg');"></div>
-                <div class="carousel-caption">
-                    <h2 style="font-size: 70px;">八仙过海</h2>
-                    <h2>金融服务</h2>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="service-box">
+                    <i class="fa fa-4x fa-thumbs-o-up wow bounceIn text-primary" data-wow-delay=".2s"></i>
+                    <h3>攻略</h3>
+                    <p class="text-muted">旅游,留学,置业,分享您的海外心得</p>
                 </div>
             </div>
-            <div class="item">
-                <div class="fill" style="background-image:url('http://ac-9dv47dhd.clouddn.com/f252a16953c8dc58.jpg');"></div>
-                <div class="carousel-caption">
-                    <h2 style="font-size: 70px;">八仙过海</h2>
-                    <h2>掌上移动</h2>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="service-box">
+                    <i class="fa fa-4x fa-twitter wow bounceIn text-primary" data-wow-delay=".3s"></i>
+                    <h3>
+                        <a rel="popover" data-img="http://ac-9dv47dhd.clouddn.com/6fef54346782755c.jpg" class="page-scroll" href="#services">掌上移动</a>
+                    </h3>
+                    <p class="text-muted">移动端随时待命,为您保驾护航</p>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Controls -->
-        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-            <span class="icon-prev"></span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" data-slide="next">
-            <span class="icon-next"></span>
-        </a>
-
-    </header>
+    <section id="services">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">郑重承诺</h2>
+                    <hr class="primary">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-check-square-o wow bounceIn text-primary"></i>
+                        <h3>真实可信 100%真房源</h3>
+                        <p class="text-muted">假一赔百</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-home wow bounceIn text-primary" data-wow-delay=".1s"></i>
+                        <h3>独家房源 覆盖全球</h3>
+                        <p class="text-muted">房源信息最权威覆盖最广</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-users wow bounceIn text-primary" data-wow-delay=".2s"></i>
+                        <h3>万名置业顾问 专业服务</h3>
+                        <p class="text-muted">百万家庭的信赖之选</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-credit-card wow bounceIn text-primary" data-wow-delay=".3s"></i>
+                        <h3>安心承诺 保驾护航</h3>
+                        <p class="text-muted">亿元保障赔付 助你购买安心房</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 {#
     <header>
@@ -406,50 +396,7 @@
         </div>
     </section>
 
-    <section id="services">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">为您服务</h2>
-                    <hr class="primary">
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="service-box">
-                        <i class="fa fa-4x fa-dollar wow bounceIn text-primary"></i>
-                        <h3>金融</h3>
-                        <p class="text-muted">贷款,众筹,分期付,只有想不到没有做不到</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="service-box">
-                        <i class="fa fa-4x fa-user-md wow bounceIn text-primary" data-wow-delay=".1s"></i>
-                        <h3>托管</h3>
-                        <p class="text-muted">贴心管家,替您打理海外房产</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="service-box">
-                        <i class="fa fa-4x fa-thumbs-o-up wow bounceIn text-primary" data-wow-delay=".2s"></i>
-                        <h3>攻略</h3>
-                        <p class="text-muted">旅游,留学,置业,分享您的海外心得</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="service-box">
-                        <i class="fa fa-4x fa-twitter wow bounceIn text-primary" data-wow-delay=".3s"></i>
-                        <h3>
-                            <a rel="popover" data-img="http://ac-9dv47dhd.clouddn.com/6fef54346782755c.jpg" class="page-scroll" href="#services">掌上移动</a>
-                        </h3>
-                        <p class="text-muted">移动端随时待命,为您保驾护航</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
 
 
@@ -463,48 +410,7 @@
     </aside>
 
 
-    <section id="services">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">郑重承诺</h2>
-                    <hr class="primary">
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="service-box">
-                        <i class="fa fa-4x fa-check-square-o wow bounceIn text-primary"></i>
-                        <h3>真实可信 100%真房源</h3>
-                        <p class="text-muted">假一赔百</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="service-box">
-                        <i class="fa fa-4x fa-home wow bounceIn text-primary" data-wow-delay=".1s"></i>
-                        <h3>独家房源 覆盖全球</h3>
-                        <p class="text-muted">房源信息最权威覆盖最广</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="service-box">
-                        <i class="fa fa-4x fa-users wow bounceIn text-primary" data-wow-delay=".2s"></i>
-                        <h3>万名置业顾问 专业服务</h3>
-                        <p class="text-muted">百万家庭的信赖之选</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="service-box">
-                        <i class="fa fa-4x fa-credit-card wow bounceIn text-primary" data-wow-delay=".3s"></i>
-                        <h3>安心承诺 保驾护航</h3>
-                        <p class="text-muted">亿元保障赔付 助你购买安心房</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
 
     <section id="contact">
