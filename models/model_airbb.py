@@ -67,6 +67,7 @@ class Community(Base):
     img = Column(String(512))
     url = Column(String(512))
     vir_url = Column(String(512))
+    img_bk = Column(String(512))
 
 
     def __repr__(self):
@@ -80,7 +81,7 @@ class School(Base):
     lng = Column(String(50))
     city_id = Column(Integer, index=True)
     data = Column(MutableDict.as_mutable(PickleType))
-    
+
 
     def __repr__(self):
         return '<school %r>' % (self.id)
@@ -93,7 +94,7 @@ class Crime(Base):
     lng = Column(String(50))
     city_id = Column(Integer, index=True)
     data = Column(MutableDict.as_mutable(PickleType))
-    
+
 
     def __repr__(self):
         return '<crime %r>' % (self.id)
