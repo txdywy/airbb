@@ -88,6 +88,12 @@
         {% endfor %}
       ];
 
+      var heas = [
+        {% for h in heas %}
+          [{{ h.lat }}, {{ h.lng }}, '{{ h.data['name'] }}', '{{ h.data['image_url'] }}'],
+        {% endfor %}
+      ];
+
       function initialize() {
 
         /* position Amsterdam */
@@ -137,6 +143,16 @@
 
         var rest_image = {
           url: 'rest.png',
+          // This marker is 20 pixels wide by 32 pixels high.
+          size: new google.maps.Size(25, 25),
+          // The origin for this image is (0, 0).
+          origin: new google.maps.Point(0, 0),
+          // The anchor for this image is the base of the flagpole at (0, 32).
+          anchor: new google.maps.Point(0, 25)
+        };
+
+        var hea_image = {
+          url: 'health.png',
           // This marker is 20 pixels wide by 32 pixels high.
           size: new google.maps.Size(25, 25),
           // The origin for this image is (0, 0).
@@ -492,7 +508,90 @@
         map.controls[google.maps.ControlPosition.TOP_RIGHT].push(restControlDiv);
 
 
-        //Crime btn
+        //Health btn
+        var hea_mkrs = [];
+        function HealthControl(controlDiv, map) {
+
+          // Set CSS for the control border.
+          var controlUI = document.createElement('div');
+          controlUI.style.backgroundColor = '#fff';
+          controlUI.style.border = '2px solid #fff';
+          controlUI.style.borderRadius = '3px';
+          controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+          controlUI.style.cursor = 'pointer';
+          controlUI.style.marginBottom = '22px';
+          controlUI.style.textAlign = 'center';
+          controlUI.title = 'Click to show schools on the map';
+          controlDiv.appendChild(controlUI);
+
+          // Set CSS for the control interior.
+          var controlText = document.createElement('div');
+          controlText.style.color = 'rgb(25,25,25)';
+          controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+          controlText.style.fontSize = '16px';
+          controlText.style.lineHeight = '38px';
+          controlText.style.paddingLeft = '5px';
+          controlText.style.paddingRight = '5px';
+          controlText.innerHTML = '医疗';
+          controlUI.appendChild(controlText);
+
+          // Setup the click event listeners: simply set the map to Chicago.
+          controlUI.addEventListener('click', function() {
+            //map.setCenter(center);
+            if (hea_mkrs.length > 0){
+              for (var i = 0; i < hea_mkrs.length; i++){
+                hea_mkrs[i].setMap(null);
+              }
+              hea_mkrs = [];
+            }
+            else{
+              for (var i = 0; i < heas.length; i++) {
+                var hea = heas[i];
+                var contentString = '<div id="content">'+
+                      '<div id="siteNotice">'+
+                      '</div>'+
+                      '<img border="0" src="'+
+                      hea[3]+
+                      '" width="120" height="80" alt="...">'+
+                      '<h3 id="firstHeading" class="firstHeading">'+
+                      hea[2]+
+                      '</h3>'+
+                      '</div>';
+                var infowindow = new google.maps.InfoWindow({
+                  content: contentString
+                });
+                var mkr = new google.maps.Marker({
+                  position: {lat: hea[0], lng: hea[1]},
+                  map: map,
+                  icon: hea_image,
+                  shape: shape,
+                  title: hea[2],
+                  //zIndex: com[3],
+                  animation: google.maps.Animation.DROP
+                });
+                hea_mkrs.push(mkr);
+                
+                google.maps.event.addListener(mkr,'click', (function(mkr,content,infowindow){ 
+                    return function() {
+                        infowindow.setContent(content);
+                        infowindow.open(map,mkr);
+                    };
+                })(mkr,contentString,infowindow)); 
+              }
+            }
+
+
+          });
+
+        }
+        var heaControlDiv = document.createElement('div');
+        var heaControl = new HealthControl(heaControlDiv, map);
+
+        heaControlDiv.index = 4;
+        map.controls[google.maps.ControlPosition.TOP_RIGHT].push(heaControlDiv);
+
+
+        //Layer btn
         var layers = [];
         function LayerControl(controlDiv, map) {
 
@@ -564,7 +663,7 @@
         var layerControlDiv = document.createElement('div');
         var layerControl = new LayerControl(layerControlDiv, map);
 
-        layerControlDiv.index = 5;
+        layerControlDiv.index = 6;
         map.controls[google.maps.ControlPosition.TOP_RIGHT].push(layerControlDiv);
 
 

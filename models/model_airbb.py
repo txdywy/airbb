@@ -111,6 +111,18 @@ class Restaurant(Base):
         return '<restaurant %r>' % (self.id)
 
 
+class Health(Base):
+    __tablename__ = 'health'
+    id = Column(Integer, primary_key=True)
+    lat = Column(String(50))
+    lng = Column(String(50))
+    city_id = Column(Integer, index=True)
+    data = Column(MutableDict.as_mutable(PickleType))
+
+    def __repr__(self):
+        return '<health %r>' % (self.id)
+
+
 class User(Base):
     __tablename__ = 'user'
 
