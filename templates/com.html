@@ -12,9 +12,9 @@
 <div class="container-fluid" id="main">
   <div class="row">
   	<div class="col-xs-4" id="left">
-    
+
       <h2>房源信息</h2>
-      
+
       <!-- item list -->
       {% for h in coms %}
       <div class="panel panel-default">
@@ -27,26 +27,26 @@
       <p>类型: {{ h.house_type }}</p>
       <p>虚拟看房: <a href="{{ h.vir_url }}">入口</a></p>
       <p>网址: <a href="{{ h.url }}">猛戳这里</a></p>
-      
+
       <hr>
       {% endfor %}
       <!-- /item list -->
-      
+
       <p>
       <a href="/#about">关于我们</a> | <a href="/">首页</a>
       </p>
-      
-      <hr> 
-        
+
+      <hr>
+
       <p>
       <a href="/#portfolio" target="_ext" class="center-block btn btn-primary">更多房源信息</a>
       </p>
-        
-      <hr>      
+
+      <hr>
 
     </div>
     <div class="col-xs-4"><!--map-canvas will be postioned here--></div>
-    
+
   </div>
 </div>
 {% endblock %}
@@ -59,7 +59,7 @@
 		<script src="http://ditu.google.cn/maps/api/js?sensor=false&extension=.js&output=embed&language=zh-CN"></script>
     {#
 		<script src="m/js/scripts.js"></script>
-    #}	
+    #}
     <script>
       $(document).ready(function(){/* google maps -----------------------------------------------------*/
       google.maps.event.addDomListener(window, 'load', initialize);
@@ -104,7 +104,7 @@
           scrollWheel: false,
           zoom: 9,
         };
-        
+
         var marker = new google.maps.Marker({
           position: latlng,
           url: '/',
@@ -165,7 +165,7 @@
           coords: [1, 1, 1, 20, 18, 20, 18, 1],
           type: 'poly'
         };
-        
+
         var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
         marker.setMap(map);
 
@@ -202,16 +202,16 @@
             zIndex: com[3],
             animation: google.maps.Animation.DROP
           });
-          
-          google.maps.event.addListener(mkr,'click', (function(mkr,content,infowindow){ 
+
+          google.maps.event.addListener(mkr,'click', (function(mkr,content,infowindow){
               return function() {
                   infowindow.setContent(content);
                   infowindow.open(map,mkr);
               };
-          })(mkr,contentString,infowindow)); 
+          })(mkr,contentString,infowindow));
         }
 
-        
+
 
         /**
          * The CenterControl adds a control to the map that recenters the map on Chicago.
@@ -256,7 +256,7 @@
         centerControlDiv.index = 1;
         map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
 
-        
+
         //School btn
         var school_mkrs = [];
         function SchoolControl(controlDiv, map) {
@@ -281,7 +281,7 @@
           controlText.style.lineHeight = '38px';
           controlText.style.paddingLeft = '5px';
           controlText.style.paddingRight = '5px';
-          controlText.innerHTML = '<span class="glyphicon glyphicon-education" aria-hidden="true" style="color: #22cc22"></span>学校';
+          controlText.innerHTML = '<span class="glyphicon glyphicon-book" aria-hidden="true" style="color: #009966"></span>学校';
           controlUI.appendChild(controlText);
 
           // Setup the click event listeners: simply set the map to Chicago.
@@ -323,13 +323,13 @@
                   animation: google.maps.Animation.DROP
                 });
                 school_mkrs.push(mkr);
-                
-                google.maps.event.addListener(mkr,'click', (function(mkr,content,infowindow){ 
+
+                google.maps.event.addListener(mkr,'click', (function(mkr,content,infowindow){
                     return function() {
                         infowindow.setContent(content);
                         infowindow.open(map,mkr);
                     };
-                })(mkr,contentString,infowindow)); 
+                })(mkr,contentString,infowindow));
               }
             }
 
@@ -368,7 +368,7 @@
           controlText.style.lineHeight = '38px';
           controlText.style.paddingLeft = '5px';
           controlText.style.paddingRight = '5px';
-          controlText.innerHTML = '<span class="glyphicon glyphicon-eye-open" aria-hidden="true" style="color: #cd2002"></span>治安';
+          controlText.innerHTML = '<span class="glyphicon glyphicon-eye-open" aria-hidden="true" style="color: #0099FF"></span>治安';
           controlUI.appendChild(controlText);
 
           // Setup the click event listeners: simply set the map to Chicago.
@@ -404,13 +404,13 @@
                   animation: google.maps.Animation.DROP
                 });
                 crime_mkrs.push(mkr);
-                
-                google.maps.event.addListener(mkr,'click', (function(mkr,content,infowindow){ 
+
+                google.maps.event.addListener(mkr,'click', (function(mkr,content,infowindow){
                     return function() {
                         infowindow.setContent(content);
                         infowindow.open(map,mkr);
                     };
-                })(mkr,contentString,infowindow)); 
+                })(mkr,contentString,infowindow));
               }
             }
 
@@ -487,13 +487,13 @@
                   animation: google.maps.Animation.DROP
                 });
                 rest_mkrs.push(mkr);
-                
-                google.maps.event.addListener(mkr,'click', (function(mkr,content,infowindow){ 
+
+                google.maps.event.addListener(mkr,'click', (function(mkr,content,infowindow){
                     return function() {
                         infowindow.setContent(content);
                         infowindow.open(map,mkr);
                     };
-                })(mkr,contentString,infowindow)); 
+                })(mkr,contentString,infowindow));
               }
             }
 
@@ -570,13 +570,13 @@
                   animation: google.maps.Animation.DROP
                 });
                 hea_mkrs.push(mkr);
-                
-                google.maps.event.addListener(mkr,'click', (function(mkr,content,infowindow){ 
+
+                google.maps.event.addListener(mkr,'click', (function(mkr,content,infowindow){
                     return function() {
                         infowindow.setContent(content);
                         infowindow.open(map,mkr);
                     };
-                })(mkr,contentString,infowindow)); 
+                })(mkr,contentString,infowindow));
               }
             }
 
@@ -700,7 +700,7 @@ var layer = new google.maps.FusionTablesLayer({
 
 
 
-      
+
       /* end google maps -----------------------------------------------------*/
       });
     </script>
