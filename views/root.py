@@ -227,3 +227,24 @@ def com():
     shops = Shop.query.filter_by(city_id=city.id).all()
     ents = Entertainment.query.filter_by(city_id=city.id).all()
     return render_template('com.html', lat=city.lat, lng=city.lng, coms=coms, schs=schs, cris=cris, rests=rests, heas=heas, parks=parks, shops=shops, ents=ents)
+
+
+@app.route('/info')
+def info():
+    c = request.args.get('c')
+    com = Community.query.get(c)
+    if not com:
+        return 'error'
+    city = City.query.get(com.city_id)
+    if not city:
+        city = City.query.filter_by(abbr='hu').first()
+    lat, lng = (city.lat, city.lng) if city else (CITY_LOCATION['la']['lat'], CITY_LOCATION['la']['lng'])
+    coms = [com]
+    schs = School.query.filter_by(city_id=city.id).all()
+    cris = Crime.query.filter_by(city_id=city.id).all()
+    rests = Restaurant.query.filter_by(city_id=city.id).all()
+    heas = Health.query.filter_by(city_id=city.id).all()
+    parks = Park.query.filter_by(city_id=city.id).all()
+    shops = Shop.query.filter_by(city_id=city.id).all()
+    ents = Entertainment.query.filter_by(city_id=city.id).all()
+    return render_template('info.html', lat=city.lat, lng=city.lng, coms=coms, schs=schs, cris=cris, rests=rests, heas=heas, parks=parks, shops=shops, ents=ents)
