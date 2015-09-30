@@ -201,6 +201,11 @@ def map():
     return render_template('map.html', lat=city.lat, lng=city.lng, houses=houses)
 
 
+@app.route('/finance')
+def finance():
+    return render_template('finance.html')
+
+
 @app.route('/com')
 def com():
     k = request.args.get('k')
