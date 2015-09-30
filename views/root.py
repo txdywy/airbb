@@ -206,6 +206,11 @@ def finance():
     return render_template('finance.html')
 
 
+@app.route('/operation')
+def operation():
+    return render_template('operation.html')
+
+
 @app.route('/com')
 def com():
     k = request.args.get('k')

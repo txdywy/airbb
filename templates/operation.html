@@ -1,0 +1,126 @@
+{% extends "layout.html" %}
+{% block headjs %}
+  <link rel="stylesheet" href="m/css/bootstrap.min.css">
+  <script src="//cdn.bootcss.com/jquery/2.0.2/jquery.min.js"></script>
+  <script src="m/js/bootstrap.min.js"></script>
+  <link href="m/css/styles.css" rel="stylesheet">
+{% endblock headjs %}
+{% block title %}房产托管{% endblock %}
+{% block body %}
+<div class="container">
+  <h2>房产托管</h2>
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#rent">出租</a></li>
+    <li><a data-toggle="tab" href="#sale">出售</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="rent" class="tab-pane fade in active">
+      <h3>出租</h3>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4><i class="fa fa-fw fa-check"></i> 报税</h4>
+                        <img class="img-responsive" src="http://ac-9dv47dhd.clouddn.com/r0pJNongJmFYOLrMSjPQgLytAsgWaFyqYuX53pK1.wx">
+                    </div>
+                    <div class="panel-body">
+                        <p>复杂的报税流程?我们全程接管</p>
+                        <a href="#" class="btn btn-danger">详情</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4><i class="fa fa-fw fa-gift"></i> 维修</h4>
+                        <img class="img-responsive" src="http://ac-9dv47dhd.clouddn.com/s9ji6nXacJXa3fRACg9R098UWKJrd1CeKvh8CTmp.wx">
+                    </div>
+                    <div class="panel-body">
+                        <p>海外房产维护鞭长莫及?我们替您操心</p>
+                        <a href="#" class="btn btn-info">详情</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4><i class="fa fa-fw fa-compass"></i> 保险</h4>
+                        <img class="img-responsive" src="http://ac-9dv47dhd.clouddn.com/Ww2cfEfaoYioqYQmBEzRc9gLwwSxUVMgTTSQ1neQ.wx">
+                    </div>
+                    <div class="panel-body">
+                        <p>复杂保险业务?我们替您搞定</p>
+                        <a href="#" class="btn btn-success">详情</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4><i class="fa fa-fw fa-compass"></i> 物业费</h4>
+                        <img class="img-responsive" src="http://ac-9dv47dhd.clouddn.com/JtspgeLD7YokxJyfPHO2xcggEHpsJ46VeT0ulA0s.wx">
+                    </div>
+                    <div class="panel-body">
+                        <p>懒得操心?我们提供专业服务</p>
+                        <a href="#" class="btn btn-primary">详情</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="sale" class="tab-pane fade">
+      <h3>出售</h3>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4><i class="fa fa-fw fa-check"></i> 报税</h4>
+                        <img class="img-responsive" src="http://ac-9dv47dhd.clouddn.com/r0pJNongJmFYOLrMSjPQgLytAsgWaFyqYuX53pK1.wx">
+                    </div>
+                    <div class="panel-body">
+                        <p>复杂的报税流程?我们全程接管</p>
+                        <a href="#" class="btn btn-danger">详情</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4><i class="fa fa-fw fa-gift"></i> 产权保险</h4>
+                        <img class="img-responsive" src="http://ac-9dv47dhd.clouddn.com/J4PKLtCMWOlke57tdq3IbCMplPjrAoeyzX91VNQ6.wx">
+                    </div>
+                    <div class="panel-body">
+                        <p>产权保险如何办理?我们替您操心</p>
+                        <a href="#" class="btn btn-info">详情</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4><i class="fa fa-fw fa-compass"></i> 律师服务</h4>
+                        <img class="img-responsive" src="http://ac-9dv47dhd.clouddn.com/4RNWoQalsrOTEtPbIyd1FSrS2AFE2MKnn5BxU81P.wx">
+                    </div>
+                    <div class="panel-body">
+                        <p>专业的法律问题?我们替您搞定</p>
+                        <a href="#" class="btn btn-success">详情</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4><i class="fa fa-fw fa-compass"></i> 验房</h4>
+                        <img class="img-responsive" src="http://ac-9dv47dhd.clouddn.com/egoRa3JM8K6KnpiNDvtEyyHiKaTrvQuxxJfaSIbS.wx">
+                    </div>
+                    <div class="panel-body">
+                        <p>如何海外验房?我们提供专业服务</p>
+                        <a href="#" class="btn btn-primary">详情</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
