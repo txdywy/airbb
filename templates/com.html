@@ -94,6 +94,12 @@
         {% endfor %}
       ];
 
+      var parks = [
+        {% for p in parks %}
+          [{{ p.lat }}, {{ p.lng }}, '{{ p.data['name'] }}', '{{ p.data['image_url'] }}'],
+        {% endfor %}
+      ];
+
       function initialize() {
 
         /* position Amsterdam */
@@ -153,6 +159,16 @@
 
         var hea_image = {
           url: 'health.png',
+          // This marker is 20 pixels wide by 32 pixels high.
+          size: new google.maps.Size(25, 25),
+          // The origin for this image is (0, 0).
+          origin: new google.maps.Point(0, 0),
+          // The anchor for this image is the base of the flagpole at (0, 32).
+          anchor: new google.maps.Point(0, 25)
+        };
+
+        var park_image = {
+          url: 'park.png',
           // This marker is 20 pixels wide by 32 pixels high.
           size: new google.maps.Size(25, 25),
           // The origin for this image is (0, 0).
@@ -281,7 +297,7 @@
           controlText.style.lineHeight = '38px';
           controlText.style.paddingLeft = '5px';
           controlText.style.paddingRight = '5px';
-          controlText.innerHTML = '<span class="glyphicon glyphicon-book" aria-hidden="true" style="color: #009966"></span>学校';
+          controlText.innerHTML = '<span class="glyphicon glyphicon-book" aria-hidden="true" style="color: #FFCC66"></span>学校';
           controlUI.appendChild(controlText);
 
           // Setup the click event listeners: simply set the map to Chicago.
@@ -663,8 +679,91 @@
         var layerControlDiv = document.createElement('div');
         var layerControl = new LayerControl(layerControlDiv, map);
 
-        layerControlDiv.index = 6;
+        layerControlDiv.index = 0;
         map.controls[google.maps.ControlPosition.TOP_RIGHT].push(layerControlDiv);
+
+
+        //Park btn
+        var park_mkrs = [];
+        function ParkControl(controlDiv, map) {
+
+          // Set CSS for the control border.
+          var controlUI = document.createElement('div');
+          controlUI.style.backgroundColor = '#fff';
+          controlUI.style.border = '2px solid #fff';
+          controlUI.style.borderRadius = '3px';
+          controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+          controlUI.style.cursor = 'pointer';
+          controlUI.style.marginBottom = '22px';
+          controlUI.style.textAlign = 'center';
+          controlUI.title = 'Click to show schools on the map';
+          controlDiv.appendChild(controlUI);
+
+          // Set CSS for the control interior.
+          var controlText = document.createElement('div');
+          controlText.style.color = 'rgb(25,25,25)';
+          controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+          controlText.style.fontSize = '16px';
+          controlText.style.lineHeight = '38px';
+          controlText.style.paddingLeft = '5px';
+          controlText.style.paddingRight = '5px';
+          controlText.innerHTML = '<span class="glyphicon glyphicon-tree-deciduous" aria-hidden="true" style="color: #009966"></span>公园';
+          controlUI.appendChild(controlText);
+
+          // Setup the click event listeners: simply set the map to Chicago.
+          controlUI.addEventListener('click', function() {
+            //map.setCenter(center);
+            if (park_mkrs.length > 0){
+              for (var i = 0; i < park_mkrs.length; i++){
+                park_mkrs[i].setMap(null);
+              }
+              park_mkrs = [];
+            }
+            else{
+              for (var i = 0; i < parks.length; i++) {
+                var park = parks[i];
+                var contentString = '<div id="content">'+
+                      '<div id="siteNotice">'+
+                      '</div>'+
+                      '<img border="0" src="'+
+                      park[3]+
+                      '" width="120" height="80" alt="...">'+
+                      '<h3 id="firstHeading" class="firstHeading">'+
+                      park[2]+
+                      '</h3>'+
+                      '</div>';
+                var infowindow = new google.maps.InfoWindow({
+                  content: contentString
+                });
+                var mkr = new google.maps.Marker({
+                  position: {lat: park[0], lng: park[1]},
+                  map: map,
+                  icon: park_image,
+                  shape: shape,
+                  title: park[2],
+                  //zIndex: com[3],
+                  animation: google.maps.Animation.DROP
+                });
+                park_mkrs.push(mkr);
+
+                google.maps.event.addListener(mkr,'click', (function(mkr,content,infowindow){
+                    return function() {
+                        infowindow.setContent(content);
+                        infowindow.open(map,mkr);
+                    };
+                })(mkr,contentString,infowindow));
+              }
+            }
+
+
+          });
+
+        }
+        var parkControlDiv = document.createElement('div');
+        var parkControl = new ParkControl(parkControlDiv, map);
+
+        parkControlDiv.index = 6;
+        map.controls[google.maps.ControlPosition.TOP_RIGHT].push(parkControlDiv);
 
 
 /*

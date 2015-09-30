@@ -124,6 +124,18 @@ class Health(Base):
         return '<health %r>' % (self.id)
 
 
+class Park(Base):
+    __tablename__ = 'park'
+    id = Column(Integer, primary_key=True)
+    lat = Column(String(50))
+    lng = Column(String(50))
+    city_id = Column(Integer, index=True)
+    data = Column(MutableDict.as_mutable(PickleType))
+
+    def __repr__(self):
+        return '<park %r>' % (self.id)
+
+
 class User(Base):
     __tablename__ = 'user'
 
