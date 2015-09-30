@@ -214,4 +214,5 @@ def com():
     rests = Restaurant.query.filter_by(city_id=city.id).all()
     heas = Health.query.filter_by(city_id=city.id).all()
     parks = Park.query.filter_by(city_id=city.id).all()
-    return render_template('com.html', lat=city.lat, lng=city.lng, coms=coms, schs=schs, cris=cris, rests=rests, heas=heas, parks=parks)
+    shops = Shop.query.filter_by(city_id=city.id).all()
+    return render_template('com.html', lat=city.lat, lng=city.lng, coms=coms, schs=schs, cris=cris, rests=rests, heas=heas, parks=parks, shops=shops)
