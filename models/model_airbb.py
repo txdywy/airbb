@@ -148,6 +148,18 @@ class Shop(Base):
         return '<shop %r>' % (self.id)
 
 
+class Entertainment(Base):
+    __tablename__ = 'entertainment'
+    id = Column(Integer, primary_key=True)
+    lat = Column(String(50))
+    lng = Column(String(50))
+    city_id = Column(Integer, index=True)
+    data = Column(MutableDict.as_mutable(PickleType))
+
+    def __repr__(self):
+        return '<entertainment %r>' % (self.id)
+
+
 class User(Base):
     __tablename__ = 'user'
 

@@ -106,6 +106,12 @@
         {% endfor %}
       ];
 
+      var ents = [
+        {% for e in ents %}
+          [{{ e.lat }}, {{ e.lng }}, '{{ e.data['name'] }}', '{{ e.data['image_url'] }}'],
+        {% endfor %}
+      ];
+
       function initialize() {
 
         /* position Amsterdam */
@@ -185,6 +191,16 @@
 
         var shop_image = {
           url: 'shop.png',
+          // This marker is 20 pixels wide by 32 pixels high.
+          size: new google.maps.Size(25, 25),
+          // The origin for this image is (0, 0).
+          origin: new google.maps.Point(0, 0),
+          // The anchor for this image is the base of the flagpole at (0, 32).
+          anchor: new google.maps.Point(0, 25)
+        };
+
+        var ent_image = {
+          url: 'ent.png',
           // This marker is 20 pixels wide by 32 pixels high.
           size: new google.maps.Size(25, 25),
           // The origin for this image is (0, 0).
@@ -864,6 +880,88 @@
         shopControlDiv.index = 7;
         map.controls[google.maps.ControlPosition.TOP_RIGHT].push(shopControlDiv);
 
+
+        //Entertainment btn
+        var ent_mkrs = [];
+        function EntControl(controlDiv, map) {
+
+          // Set CSS for the control border.
+          var controlUI = document.createElement('div');
+          controlUI.style.backgroundColor = '#fff';
+          controlUI.style.border = '2px solid #fff';
+          controlUI.style.borderRadius = '3px';
+          controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+          controlUI.style.cursor = 'pointer';
+          controlUI.style.marginBottom = '22px';
+          controlUI.style.textAlign = 'center';
+          controlUI.title = 'Click to show schools on the map';
+          controlDiv.appendChild(controlUI);
+
+          // Set CSS for the control interior.
+          var controlText = document.createElement('div');
+          controlText.style.color = 'rgb(25,25,25)';
+          controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+          controlText.style.fontSize = '16px';
+          controlText.style.lineHeight = '38px';
+          controlText.style.paddingLeft = '5px';
+          controlText.style.paddingRight = '5px';
+          controlText.innerHTML = '<span class="glyphicon glyphicon-music" aria-hidden="true" style="color: #600000"></span>娱乐';
+          controlUI.appendChild(controlText);
+
+          // Setup the click event listeners: simply set the map to Chicago.
+          controlUI.addEventListener('click', function() {
+            //map.setCenter(center);
+            if (ent_mkrs.length > 0){
+              for (var i = 0; i < ent_mkrs.length; i++){
+                ent_mkrs[i].setMap(null);
+              }
+              ent_mkrs = [];
+            }
+            else{
+              for (var i = 0; i < ents.length; i++) {
+                var ent = ents[i];
+                var contentString = '<div id="content">'+
+                      '<div id="siteNotice">'+
+                      '</div>'+
+                      '<img border="0" src="'+
+                      ent[3]+
+                      '" width="120" height="80" alt="...">'+
+                      '<h3 id="firstHeading" class="firstHeading">'+
+                      ent[2]+
+                      '</h3>'+
+                      '</div>';
+                var infowindow = new google.maps.InfoWindow({
+                  content: contentString
+                });
+                var mkr = new google.maps.Marker({
+                  position: {lat: ent[0], lng: ent[1]},
+                  map: map,
+                  icon: ent_image,
+                  shape: shape,
+                  title: ent[2],
+                  //zIndex: com[3],
+                  animation: google.maps.Animation.DROP
+                });
+                ent_mkrs.push(mkr);
+
+                google.maps.event.addListener(mkr,'click', (function(mkr,content,infowindow){
+                    return function() {
+                        infowindow.setContent(content);
+                        infowindow.open(map,mkr);
+                    };
+                })(mkr,contentString,infowindow));
+              }
+            }
+
+
+          });
+
+        }
+        var entControlDiv = document.createElement('div');
+        var entControl = new EntControl(entControlDiv, map);
+
+        entControlDiv.index = 7;
+        map.controls[google.maps.ControlPosition.TOP_RIGHT].push(entControlDiv);
 /*
 var layer = new google.maps.FusionTablesLayer({
     query: {
