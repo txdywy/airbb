@@ -16,17 +16,15 @@
       <h2>房源信息</h2>
 
       <!-- item list -->
-      {% for h in coms %}
+      {% for h in hous %}
       <div class="panel panel-default">
-        <div class="panel-heading"><a href="">{{ h.title }}</a></div>
+        <div class="panel-heading"><a href="">{{ h.data['address'] }}</a></div>
       </div>
-      <img border="0" src="{{ h.img }}" class="img-responsive img-centered" alt="...">
-      <p>地址: {{ h.address }}</p>
-      <p>总价: {{ h.total_price }}</p>
-      <p>面积: {{ h.square }}</p>
-      <p>类型: {{ h.house_type }}</p>
-      <p>虚拟看房: <a href="{{ h.vir_url }}">入口</a></p>
-      <p>网址: <a href="{{ h.url }}">猛戳这里</a></p>
+      <img border="0" src="{{ h.data['img'] }}" class="img-responsive img-centered" alt="...">
+      <p>地址: {{ h.data['address'] }}</p>
+      <p>价格: {{ h.data['price'] }}</p>
+      <p>面积: {{ h.data['sqft'] }}</p>
+      <p>平面图: <a href="{{ h.data['floor'] }}">入口</a></p>
 
       <hr>
       {% endfor %}
@@ -67,6 +65,30 @@
       var coms = [
         {% for h in coms %}
           ['{{ h.title }}', {{ h.lat }}, {{ h.lng }}, {{ h.id }}, '{{ h.img }}', '{{ h.address }}', '{{ h.info }}', '{{ h.url }}', '{{ h.total_price }}', '{{ h.square }}', '{{ h.house_type }}', '{{ h.vir_url }}', ],
+        {% endfor %}
+      ];
+
+			var hous = [
+        {% for h in hous %}
+          [
+						'{{ h.data['community'] }}[{{ h.id }}]', //0
+						{{ h.lat }},                             //1
+						{{ h.lng }},                             //2
+						'{{ h.data['address'] }}',               //3
+						'{{ h.data['community'] }}',             //4
+						'{{ h.data['plan'] }}',                  //5
+						'{{ h.data['series'] }}',                //6
+						'{{ h.data['price'] }}',                 //7
+						'{{ h.data['sqft'] }}',                  //8
+						'{{ h.data['stories'] }}',               //9
+						'{{ h.data['beds'] }}',                  //10
+						'{{ h.data['baths'] }}',                 //11
+						'{{ h.data['status'] }}',                //12
+						'{{ h.data['info'] }}',                  //13
+						'{{ h.data['img'] }}',                   //14
+						'{{ h.data['floor'] }}',                 //15
+						{{ h.id }},                              //16
+				  ],
         {% endfor %}
       ];
 
@@ -120,7 +142,7 @@
         var mapOptions = {
           center: latlng,
           scrollWheel: false,
-          zoom: 9,
+          zoom: 16,
         };
 
         var marker = new google.maps.Marker({
@@ -131,6 +153,16 @@
 
         var image = {
           url: 'ico-size-big.png',
+          // This marker is 20 pixels wide by 32 pixels high.
+          size: new google.maps.Size(25, 25),
+          // The origin for this image is (0, 0).
+          origin: new google.maps.Point(0, 0),
+          // The anchor for this image is the base of the flagpole at (0, 32).
+          anchor: new google.maps.Point(0, 25)
+        };
+
+				var house_image = {
+          url: 'house.png',
           // This marker is 20 pixels wide by 32 pixels high.
           size: new google.maps.Size(25, 25),
           // The origin for this image is (0, 0).
@@ -217,6 +249,8 @@
         var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
         marker.setMap(map);
 
+        //Community
+				/*
         for (var i = 0; i < coms.length; i++) {
           var com = coms[i];
           var contentString = '<div id="content">'+
@@ -258,8 +292,55 @@
               };
           })(mkr,contentString,infowindow));
         }
+				*/
 
+        //House
+				for (var i = 0; i < hous.length; i++) {
+          var hou = hous[i];
+          var contentString = '<div id="content">'+
+                '<div id="siteNotice">'+
+                '</div>'+
+                '<img border="0" src="'+
+                hou[14]+
+                '" width="300" height="200" alt="...">'+
+                '<h3 id="firstHeading" class="firstHeading">'+
+                hou[0]+
+                '</h3>'+
+                '<div id="bodyContent">'+
+								'<p>地址: '+hou[3]+'</p>'+
+                '<p>社区: '+hou[4]+'</p>'+
+								'<p>计划: '+hou[5]+'</p>'+
+								'<p>系列: '+hou[6]+'</p>'+
+                '<p>价格: '+hou[7]+'</p>'+
+                '<p>面积: '+hou[8]+'</p>'+
+                '<p>楼层: '+hou[9]+'</p>'+
+                '<p>卧室: '+hou[10]+'</p>'+
+								'<p>卫生间: '+hou[11]+'</p>'+
+								'<p>状态: '+hou[12]+'</p>'+
+								'<p>信息: '+hou[13]+'</p>'+
+                '<p>平面图: <a href="'+hou[15]+'">入口</a></p>'+
+                '</div>'+
+                '</div>';
+          var infowindow = new google.maps.InfoWindow({
+            content: contentString
+          });
+          var mkr = new google.maps.Marker({
+            position: {lat: hou[1], lng: hou[2]},
+            map: map,
+            icon: house_image,
+            shape: shape,
+            title: hou[0],
+            zIndex: hou[16],
+            animation: google.maps.Animation.DROP
+          });
 
+          google.maps.event.addListener(mkr,'click', (function(mkr,content,infowindow){
+              return function() {
+                  infowindow.setContent(content);
+                  infowindow.open(map,mkr);
+              };
+          })(mkr,contentString,infowindow));
+        }
 
         /**
          * The CenterControl adds a control to the map that recenters the map on Chicago.
