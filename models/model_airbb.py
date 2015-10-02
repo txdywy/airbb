@@ -33,8 +33,8 @@ class Area(Base):
         return '<Area %r>' % (self.id)
 
 
-class House(Base):
-    __tablename__ = 'house'
+class HouseOld(Base):
+    __tablename__ = 'house_old'
     id = Column(Integer, primary_key=True)
     lat = Column(String(50))
     lng = Column(String(50))
@@ -48,7 +48,20 @@ class House(Base):
 
 
     def __repr__(self):
-        return '<House %r>' % (self.id)
+        return '<House_old %r>' % (self.id)
+
+
+class House(Base):
+    __tablename__ = 'house'
+    id = Column(Integer, primary_key=True)
+    lat = Column(String(50))
+    lng = Column(String(50))
+    com_id = Column(Integer, index=True)
+    data = Column(MutableDict.as_mutable(PickleType))
+
+
+    def __repr__(self):
+        return '<%r %r>' % (self.__tablename__, self.id)
 
 
 class Community(Base):
