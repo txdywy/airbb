@@ -67,7 +67,7 @@
 
       var coms = [
         {% for h in coms %}
-          ['{{ h.title }}', {{ h.lat }}, {{ h.lng }}, {{ h.id }}, '{{ h.img }}', '{{ h.address }}', '{{ h.info }}', '{{ h.url }}', '{{ h.total_price }}', '{{ h.square }}', '{{ h.house_type }}', '{{ h.vir_url }}', {{ h.id }}, ],
+          ['{{ h.title }}', {{ h.lat }}, {{ h.lng }}, {{ h.id }}, '{{ h.img }}', '{{ h.address }}', '{{ h.info }}', '{{ h.url }}', '{{ h.total_price }}', '{{ h.square }}', '{{ h.house_type }}', '{{ h.vir_url }}', {{ h.id }}, {{ h.sale}}, ],
         {% endfor %}
       ];
 
@@ -132,6 +132,16 @@
 
         var image = {
           url: 'ico-size-big.png',
+          // This marker is 20 pixels wide by 32 pixels high.
+          size: new google.maps.Size(25, 25),
+          // The origin for this image is (0, 0).
+          origin: new google.maps.Point(0, 0),
+          // The anchor for this image is the base of the flagpole at (0, 32).
+          anchor: new google.maps.Point(0, 25)
+        };
+
+				var sale_image = {
+          url: 'sale.png',
           // This marker is 20 pixels wide by 32 pixels high.
           size: new google.maps.Size(25, 25),
           // The origin for this image is (0, 0).
@@ -243,10 +253,15 @@
           var infowindow = new google.maps.InfoWindow({
             content: contentString
           });
+					var img = image;
+					if (com[13] === 1){
+						img = sale_image;
+					}
+
           var mkr = new google.maps.Marker({
             position: {lat: com[1], lng: com[2]},
             map: map,
-            icon: image,
+            icon: img,
             shape: shape,
             title: com[0],
             zIndex: com[3],

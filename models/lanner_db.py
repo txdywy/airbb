@@ -317,23 +317,19 @@ flush(c)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+c=Community()
+c.lat = '29.946694'
+c.lng = '-95.499468'
+c.city_id = 6
+c.title = 'Hidden Meadow'
+c.info = """If you desire to lead a life that's closer to nature, then Hidden Meadow is the place for your family. Five minutes from Lake Sheldon State Park and 15 minutes from Lake Houston, you'll be able to easily enjoy the best activities our State Park system has to offer, such as fishing and canoeing, along with an environmental learning center. Hidden Meadow is located in the Sheldon ISD, which supports Carroll Elementary, a 'Recognized' school in its class. With easy access to Downtown Houston via Highway 90, Sam Houston Tollway and the Port of Houston, you'll find Hidden Meadow to be as relaxing as it is convenient."""
+c.total_price = '$130 - $170'
+c.square = '1,385 - 2,153 sq.ft.'
+c.house_type = 'Single Family'
+c.zipcode = '77044'
+c.address = '13007 Mariposa Green Lane, Houston, Texas 77044'
+c.img = 'http://www.libertyhomebuilders.com/floor-plans-renderings/img-plan-1395.jpg'
+c.url = 'http://www.libertyhomebuilders.com/communities/hidden-meadow'
+c.img_bk = c.img
+c.sale = 1
+flush(c)

@@ -68,6 +68,7 @@ class Community(Base):
     url = Column(String(512))
     vir_url = Column(String(512))
     img_bk = Column(String(512))
+    sale = Column(Integer, default=0)
 
 
     def __repr__(self):
