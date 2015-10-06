@@ -230,6 +230,10 @@
 
         for (var i = 0; i < coms.length; i++) {
           var com = coms[i];
+          var video = '';
+          if (com[13] === 1){
+            video =  '<video width="100%" autoplay="autoplay" loop="loop" controls><source src="http://ac-9dv47dhd.clouddn.com/4fe7bf5f4acd66bc.mp4" type="video/mp4"></video>';
+          }
           var contentString = '<div id="content">'+
                 '<div id="siteNotice">'+
                 '</div>'+
@@ -244,6 +248,7 @@
                 '<p>总价: '+com[8]+'</p>'+
                 '<p>面积: '+com[9]+'</p>'+
                 '<p>地址: '+com[5]+'</p>'+
+                video+
                 '<p>信息: '+com[6]+'</p>'+
                 '<p>详情页: <a href="/info?c='+com[12]+'">最大力戳这里</a></p>'+
                 '<p>虚拟看房: <a href="'+com[11]+'">入口</a></p>'+
