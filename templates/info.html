@@ -297,6 +297,7 @@
         //House
 				for (var i = 0; i < hous.length; i++) {
           var hou = hous[i];
+          var video =  '<video width="100%" autoplay="autoplay" loop="loop" controls><source src="http://ac-9dv47dhd.clouddn.com/b8fc89c816d4ed00.mp4" type="video/mp4"></video>';
           var contentString = '<div id="content">'+
                 '<div id="siteNotice">'+
                 '</div>'+
@@ -317,6 +318,7 @@
                 '<p>卧室: '+hou[10]+'</p>'+
 								'<p>卫生间: '+hou[11]+'</p>'+
 								'<p>状态: '+hou[12]+'</p>'+
+                video+
 								'<p>信息: '+hou[13]+'</p>'+
                 '<p>平面图: <a href="'+hou[15]+'">入口</a></p>'+
                 '</div>'+
