@@ -275,6 +275,22 @@
 
           if (com[13] === 2){
             img = pin_image;
+            video =  '<iframe class="video_iframe" style="z-index: 1; width: 670px !important; height: 502.5px !important; overflow: hidden;" height="502.5" width="670" frameborder="0" data-src="http://v.qq.com/iframe/player.html?vid=y0141fv20hy&amp;width=300&amp;height=200&amp;auto=0" allowfullscreen="" src="http://v.qq.com/iframe/player.html?vid=y0141fv20hy&amp;width=670&amp;height=502.5&amp;auto=0" scrolling="no"></iframe>';
+            contentString = '<div id="content">'+
+                            '<div id="siteNotice">'+
+                            '</div>'+
+                            '<img border="0" src="'+
+                            com[4]+
+                            '" width="300" height="200" alt="...">'+
+                            '<h3 id="firstHeading" class="firstHeading">'+
+                            com[0]+
+                            '</h3>'+
+                            '<div id="bodyContent">'+
+                            '<p>园区视频: </p>'+
+                            video+
+                            '<p>网址: <a href="'+com[7]+'">猛戳这里</a></p>'+
+                            '</div>'+
+                            '</div>';
           }
 
           var mkr = new google.maps.Marker({
