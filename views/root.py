@@ -169,6 +169,7 @@ def area():
 
 @app.route('/')
 def index():
+    return redirect('http://www.bkweek.com/shujuguanli/index.aspx')
     city = request.args.get('c')
     city = city if city else u'\u57ce\u5e02'
     return render_template('index.html', city=city)
